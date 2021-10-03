@@ -22,42 +22,40 @@ function makeCamelCase(arr){
 	}, []);
 	return newString;
 }
-console.log(makeCamelCase(["USER", 0, 15.5, "nAme", "AGE", 5, {name: "John", age: 15}, "data"]));
+console.log(makeCamelCase(["USER", 0, 15.5, "nAme", "AGE", 5, {name: "John", age: 15}, "data"])); //userNameAgeData
 
 //Створити функцію яка отримує параметром масив цілих чисел 1 <= value <= 26, і повертала б масиву
 // у якому кожен елемент масиву є літерою англійського алфавіту відповідний конкретному елементу масива
 // (наприклад 1 = a, 2 = b, 3 = c, 4 = d, …). Приклад [4, 3, 22, 11] - в результаті маємо отримати
 // [d, c, v, k]
 
+let alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+function makeLetters(arrNum) {
+	let arrLetters = [];
+	arrNum.map((number) => {
+		if (number > 0 && number <= 26) {
+			arrLetters.push(alphabet[number-1]);
+		}
+	}, []);
+	return arrLetters;
+}
+
+console.log(makeLetters([1, 4, 8, 15, 23])); //['a', 'd', 'h', 'o', 'w']
 
 //Створити функцію яка параметром отримує об’єкт (наприклад {a: 22, b: -11.35, c: 41.2, d: ‘hello’}) 
 //і повертає новий об’єкт у який містить тільки числа більші рівні 0.
 
-// function makePositiveNum(obj) {
-// 	let arrValues = Object.values(obj);
-// 	let arrKeys = Object.keys(obj);
-// 	let newObj = {};
-// 	for (let i = 0; i < arrValues.length; i++) {
-// 		if (typeof arrValues[i] === "number" && arrValues[i] > 0) {
-// 			newObj[arrKeys[i]] = arrValues[i];
-// 		}
-// 	}
-// 	return newObj;
-// }
-
-// console.log(makePositiveNum({a: 22, b: -11.35, c: 41.2, d: "hello", e: 95}));
-
-
 function makePositiveNum(obj) {
-	let arrValues = Object.values(obj);
-	let arrKeys = Object.keys(obj);
+	let arrEntries = Object.entries(obj);
 	let newObj = {};
-	for (let i = 0; i < arrValues.length; i++) {
-		if (typeof arrValues[i] === "number" && arrValues[i] > 0) {
-			newObj[arrKeys[i]] = arrValues[i];
+	arrEntries.map((entry) => {
+		if (typeof entry[1] === "number" && entry[1] > 0) {
+			newObj[entry[0]] = entry[1];
 		}
-	}
+	}, []);
+		
 	return newObj;
 }
 
-console.log(makePositiveNum({a: 22, b: -11.35, c: 41.2, d: "hello", e: 95}));
+console.log(makePositiveNum({a: 22, b: -11.35, c: 41.2, d: "hello", e: 95})); //{a: 22, c: 41.2, e: 95}
